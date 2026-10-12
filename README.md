@@ -4,6 +4,8 @@
 
 ### Computer & Control Engineering Student · Software Developer · AI Enthusiast
 
+![Profile Views](https://komarev.com/ghpvc/?username=R3Dzf&style=flat-square&label=Profile+Views&color=blue)
+
 <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=20&pause=1000&center=true&vCenter=true&width=760&lines=Building+software+that+solves+real+problems;Exploring+AI%2C+Computer+Vision+%26+Intelligent+Systems;Turning+engineering+ideas+into+working+projects" alt="Typing SVG" />
 
 <p>
@@ -241,7 +243,7 @@ I prefer learning through projects. Whether I'm working on a control-system solv
 
 **Always learning. Always building.**
 
-<img src="https://komarev.com/ghpvc/?username=R3Dzf&style=flat-square&label=Profile+Views" alt="Profile views" />
+
 
 </div>
 

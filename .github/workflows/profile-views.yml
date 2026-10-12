@@ -1,0 +1,60 @@
+name: Update profile views badge
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 * * * *'
+  push:
+    paths:
+      - '.github/workflows/profile-views.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: profile-views-badge
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out profile repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Fetch and validate visitor badge
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p assets
+          curl --fail --location --silent --show-error --retry 3 --retry-delay 3 --max-time 40 \
+            --header 'Accept: image/svg+xml' \
+            'https://komarev.com/ghpvc/?username=R3Dzf' -o /tmp/profile-views.svg
+          python3 - <<'PY'
+          import os
+          import xml.etree.ElementTree as ET
+          path = '/tmp/profile-views.svg'
+          if not (100 < os.stat(path).st_size < 100_000):
+              raise SystemExit('Badge SVG has an unexpected size')
+          root = ET.parse(path).getroot()
+          if root.tag != '{http://www.w3.org/2000/svg}svg':
+              raise SystemExit('Badge response is not an SVG image')
+          if any(tag.tag.endswith(('script', 'foreignObject')) for tag in root.iter()):
+              raise SystemExit('Badge contains disallowed content')
+          os.replace(path, 'assets/profile-views.svg')
+          PY
+      - name: Commit badge if changed
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add assets/profile-views.svg
+          if git diff --cached --quiet; then
+            echo 'No badge change'
+            exit 0
+          fi
+          git -c user.name='github-actions[bot]' \
+              -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
+              commit -m 'chore: refresh profile views badge'
+          git push

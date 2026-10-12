@@ -4,7 +4,7 @@
 
 ### Computer & Control Engineering Student · Software Developer · AI Enthusiast
 
-![Profile Views](https://komarev.com/ghpvc/?username=R3Dzf)
+![Profile Views](./assets/profile-views.svg)
 
 <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=20&pause=1000&center=true&vCenter=true&width=760&lines=Building+software+that+solves+real+problems;Exploring+AI%2C+Computer+Vision+%26+Intelligent+Systems;Turning+engineering+ideas+into+working+projects" alt="Typing SVG" />
 
